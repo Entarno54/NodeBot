@@ -8,13 +8,13 @@ const { create } = require("domain")
 module.exports = [
     {
         Name: "play",
-        Command: async (message, arguments) => {
+        Command: (message, arguments) => {
             console.log("Started")
             const link = arguments[0]
 
             const author = message.author
 
-            var member = await message.guild.members.fetch(author.id)
+            var member = message.guild.members.fetch(author.id)
             console.log(`Got member ${member}`)
 
             const channel = member.voice.channel

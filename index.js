@@ -74,7 +74,7 @@ client.on("messageCreate", async message => {
         return
     }
 
-    await realCommand.Command(message, args)
+    realCommand.Command(message, args)
 })
 
 client.login(process.env.TOKEN)
