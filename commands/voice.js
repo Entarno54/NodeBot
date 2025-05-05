@@ -13,7 +13,9 @@ const yt = new YtDlp({
 function downloadVideo(link) {
     try {
         const output = yt.download(link, {
-            type: "mp3",
+            format: {
+                type: "mp3"
+            }
         })
         console.log(output)
     } catch {}
@@ -50,19 +52,24 @@ module.exports = [
                 connection.once(VoiceConnectionStatus.Ready, () => {
                     console.log(`Made connection`)
     
-                    const file = downloadVideo(link)
+                    yt.getFileAsync(link, {
+                        format: {
+                            type: "mp3"
+                        }
+                    }).then(Evil => {
 
-                    const resource = createAudioResource("/home/entar/NodeBot/music/sunburn.mp3")
-                    console.log(`Made resource`)
-        
-                    const player = createAudioPlayer()
-                    console.log(`Made player`)
-        
-                    player.play(resource)
-                    console.log(`Started playing`)
-        
-                    const subscription = connection.subscribe(player)
-                    console.log(`Subscribed player`)
+                        const resource = createAudioResource(Evil.path)
+                        console.log(`Made resource`)
+            
+                        const player = createAudioPlayer()
+                        console.log(`Made player`)
+            
+                        player.play(resource)
+                        console.log(`Started playing`)
+            
+                        const subscription = connection.subscribe(player)
+                        console.log(`Subscribed player`)
+                    })
                 })
             })
             
