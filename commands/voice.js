@@ -55,14 +55,7 @@ module.exports = [
                 connection.once(VoiceConnectionStatus.Ready, () => {
                     console.log(`Made connection`)
     
-                    yt.getFileAsync(link, {
-                        format: {
-                            filter: "audioonly",
-                            type: "mp3",
-                            quality: "lowest"
-                        },
-                        filename: "evil.mp3"
-                    }).then(Evil => {
+                    const fil = downloadVideo(link)
                         console.log(Evil)
                         const resource = createAudioResource(Evil.path)
                         console.log(`Made resource`)
@@ -75,7 +68,6 @@ module.exports = [
             
                         const subscription = connection.subscribe(player)
                         console.log(`Subscribed player`)
-                    })
                 })
             })
             
