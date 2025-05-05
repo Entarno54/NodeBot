@@ -7,7 +7,7 @@ const { create } = require("domain")
 const {YtDlp} = require("ytdlp-nodejs")
 
 const yt = new YtDlp({
-    binaryPath: "/usr/bin/yt-dlp"
+    binaryPath: "/home/entar/NodeBot/yt-dlp"
 })
 
 function downloadVideo(link) {
