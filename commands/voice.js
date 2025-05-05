@@ -14,39 +14,41 @@ module.exports = [
 
             const author = message.author
 
-            var member = message.guild.members.fetch(author.id)
-            console.log(`Got member ${member}`)
+            message.guild.members.fetch(author.id).then(member => {
+                console.log(`Got member ${member}`)
 
-            const channel = member.voice.channel
-
-            if (!channel) {
-                return console.log("No channel")
-            }
-            console.log(`Got channel ${channel}`)
-
-            const connection = joinVoiceChannel({
-                channelId: channel.id,
-                guildId: message.guild.id,
-                adapterCreator: channel.guild.voiceAdapterCreator
-            });
-            
-            console.log(`Made connection`)
-
-            const resource = createAudioResource(path.join(__dirname, "music", "sunburn.mp3"))
-            console.log(`Made resource`)
-
-            const player = createAudioPlayer({
+                const channel = member.voice.channel
+    
+                if (!channel) {
+                    return console.log("No channel")
+                }
+                console.log(`Got channel ${channel}`)
+    
+                const connection = joinVoiceChannel({
+                    channelId: channel.id,
+                    guildId: message.guild.id,
+                    adapterCreator: channel.guild.voiceAdapterCreator
+                });
                 
+                console.log(`Made connection`)
+    
+                const resource = createAudioResource(path.join(__dirname, "music", "sunburn.mp3"))
+                console.log(`Made resource`)
+    
+                const player = createAudioPlayer({
+                    
+                })
+                console.log(`Made player`)
+    
+    
+    
+                player.play(resource)
+                console.log(`Started playing`)
+    
+                connection.subscribe(player)
+                console.log(`Subscribed player`)
             })
-            console.log(`Made player`)
-
-
-
-            player.play(resource)
-            console.log(`Started playing`)
-
-            connection.subscribe(player)
-            console.log(`Subscribed player`)
+            
         }
     }
 ]
