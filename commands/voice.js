@@ -33,12 +33,10 @@ module.exports = [
                 connection.once(VoiceConnectionStatus.Ready, () => {
                     console.log(`Made connection`)
     
-                    const resource = createAudioResource("home/entar/NodeBot/music/sunburn.mp3")
+                    const resource = createAudioResource("/home/entar/NodeBot/music/sunburn.mp3")
                     console.log(`Made resource`)
         
-                    const player = createAudioPlayer({
-                        
-                    })
+                    const player = createAudioPlayer()
                     console.log(`Made player`)
         
         
@@ -46,7 +44,7 @@ module.exports = [
                     player.play(resource)
                     console.log(`Started playing`)
         
-                    connection.subscribe(player)
+                    const subscription = connection.subscribe(player)
                     console.log(`Subscribed player`)
                 })
             })
