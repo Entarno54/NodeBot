@@ -1,6 +1,6 @@
 const client = require("../index.js")
 const path = require("path")
-const {createAudioResource, createAudioPlayer, joinVoiceChannel, StreamType} = require("@discordjs/voice")
+const {createAudioResource, createAudioPlayer, joinVoiceChannel, StreamType, VoiceConnectionStatus} = require("@discordjs/voice")
 const {createReadStream} = require("fs")
 const {Message, GuildMember} = require("discord.js")
 const { create } = require("domain")
@@ -30,23 +30,25 @@ module.exports = [
                     adapterCreator: channel.guild.voiceAdapterCreator
                 });
                 
-                console.log(`Made connection`)
+                connection.once(VoiceConnectionStatus.Ready, () => {
+                    console.log(`Made connection`)
     
-                const resource = createAudioResource("home/entar/NodeBot/music/sunburn.mp3")
-                console.log(`Made resource`)
-    
-                const player = createAudioPlayer({
-                    
+                    const resource = createAudioResource("home/entar/NodeBot/music/sunburn.mp3")
+                    console.log(`Made resource`)
+        
+                    const player = createAudioPlayer({
+                        
+                    })
+                    console.log(`Made player`)
+        
+        
+        
+                    player.play(resource)
+                    console.log(`Started playing`)
+        
+                    connection.subscribe(player)
+                    console.log(`Subscribed player`)
                 })
-                console.log(`Made player`)
-    
-    
-    
-                player.play(resource)
-                console.log(`Started playing`)
-    
-                connection.subscribe(player)
-                console.log(`Subscribed player`)
             })
             
         }
