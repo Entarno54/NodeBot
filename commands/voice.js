@@ -4,6 +4,18 @@ const {createAudioResource, createAudioPlayer, joinVoiceChannel, StreamType, Voi
 const {createReadStream} = require("fs")
 const {Message, GuildMember} = require("discord.js")
 const { create } = require("domain")
+const {YtDlp} = require("ytdlp-nodejs")
+
+const yt = new YtDlp()
+
+function downloadVideo(link) {
+    try {
+        const output = yt.download(link, {
+            type: "mp3",
+        })
+        console.log(output)
+    } catch {}
+}
 
 module.exports = [
     {
@@ -11,6 +23,9 @@ module.exports = [
         Command: (message, arguments) => {
             console.log("Started")
             const link = arguments[0]
+            if (!link) {
+                return message.reply("No link")
+            }
 
             const author = message.author
 
@@ -20,7 +35,7 @@ module.exports = [
                 const channel = member.voice.channel
     
                 if (!channel) {
-                    return console.log("No channel")
+                    return message.reply("You aren't in a voice channel.")
                 }
                 console.log(`Got channel ${channel}`)
     
@@ -33,13 +48,13 @@ module.exports = [
                 connection.once(VoiceConnectionStatus.Ready, () => {
                     console.log(`Made connection`)
     
+                    const file = downloadVideo(link)
+
                     const resource = createAudioResource("/home/entar/NodeBot/music/sunburn.mp3")
                     console.log(`Made resource`)
         
                     const player = createAudioPlayer()
                     console.log(`Made player`)
-        
-        
         
                     player.play(resource)
                     console.log(`Started playing`)
