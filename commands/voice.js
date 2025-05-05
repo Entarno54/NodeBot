@@ -32,7 +32,7 @@ module.exports = [
                 
                 console.log(`Made connection`)
     
-                const resource = createAudioResource(path.join(__dirname, "music", "sunburn.mp3"))
+                const resource = createAudioResource("home/entar/NodeBot/music/sunburn.mp3")
                 console.log(`Made resource`)
     
                 const player = createAudioPlayer({
