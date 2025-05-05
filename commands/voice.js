@@ -60,7 +60,7 @@ module.exports = [
                         },
                         filename: "evil.mp3"
                     }).then(Evil => {
-
+                        console.log(Evil.path)
                         const resource = createAudioResource(Evil.path)
                         console.log(`Made resource`)
             
