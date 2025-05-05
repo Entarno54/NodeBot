@@ -12,16 +12,14 @@ const yt = new YtDlp({
 
 function downloadVideo(link) {
     try {
-        const output = yt.download(link, {
-            format: {
-                type: "mp3"
-            }
+        const output = yt.exec(link, {
+            output: "evil.mp3"
         })
         console.log(output)
     } catch {}
 }
 
-var Playing = true;
+var Playing = false;
 
 module.exports = [
     {
