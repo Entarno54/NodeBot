@@ -54,8 +54,11 @@ module.exports = [
     
                     yt.getFileAsync(link, {
                         format: {
-                            type: "mp3"
-                        }
+                            filter: "audioonly",
+                            type: "mp3",
+                            quality: "lowest"
+                        },
+                        filename: "evil.mp3"
                     }).then(Evil => {
 
                         const resource = createAudioResource(Evil.path)
