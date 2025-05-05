@@ -21,6 +21,8 @@ function downloadVideo(link) {
     } catch {}
 }
 
+var Playing = true;
+
 module.exports = [
     {
         Name: "play",
@@ -29,6 +31,9 @@ module.exports = [
             const link = arguments[0]
             if (!link) {
                 return message.reply("No link")
+            }
+            if (Playing) {
+                return message.reply("Already playing audio")
             }
 
             const author = message.author
@@ -60,7 +65,7 @@ module.exports = [
                         },
                         filename: "evil.mp3"
                     }).then(Evil => {
-                        console.log(Evil.path)
+                        console.log(Evil)
                         const resource = createAudioResource(Evil.path)
                         console.log(`Made resource`)
             
