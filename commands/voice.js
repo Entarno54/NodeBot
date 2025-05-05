@@ -6,7 +6,9 @@ const {Message, GuildMember} = require("discord.js")
 const { create } = require("domain")
 const {YtDlp} = require("ytdlp-nodejs")
 
-const yt = new YtDlp()
+const yt = new YtDlp({
+    binaryPath: "/usr/bin/yt-dlp"
+})
 
 function downloadVideo(link) {
     try {
